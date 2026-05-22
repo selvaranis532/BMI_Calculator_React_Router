@@ -64,10 +64,151 @@ Create routing structure with react-router-dom:
 <li>Add styling using CSS or Tailwind.</li>
 
 ## PROGRAM
+## App.jsx:
+```
+import BMI from "./BMI";
 
+function App() {
+  return (
+    <div>
+      <BMI />
+    </div>
+  );
+}
+
+export default App;
+```
+BMI.jsx
+```
+import { useState } from "react";
+import "./BMI.css";
+
+function BMI() {
+
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [bmi, setBmi] = useState("");
+  const [status, setStatus] = useState("");
+
+  const calculateBMI = () => {
+
+    const heightInMeter = height / 100;
+
+    const bmiValue =
+      (weight / (heightInMeter * heightInMeter)).toFixed(2);
+
+    setBmi(bmiValue);
+
+    if (bmiValue < 18.5) {
+      setStatus("Underweight");
+    }
+
+    else if (bmiValue >= 18.5 && bmiValue < 24.9) {
+      setStatus("Normal");
+    }
+
+    else if (bmiValue >= 25 && bmiValue < 29.9) {
+      setStatus("Overweight");
+    }
+
+    else {
+      setStatus("Obese");
+    }
+  };
+
+  return (
+    <div className="container">
+
+      <div className="bmi-box">
+
+        <h2>BMI Calculator</h2>
+
+        <input
+          type="number"
+          placeholder="Enter Height in cm"
+          value={height}
+          onChange={(e) => setHeight(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Enter Weight in kg"
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+        />
+
+        <button onClick={calculateBMI}>
+          Calculate BMI
+        </button>
+
+        <h3>Your BMI: {bmi}</h3>
+
+        <h3>Status: {status}</h3>
+
+      </div>
+
+      <footer>
+        SELVARANI.S | 24901160S2
+      </footer>
+
+    </div>
+  );
+}
+
+export default BMI;
+```
+## BMI.css
+```
+body {
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.bmi-box {
+  width: 350px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px gray;
+}
+
+input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: green;
+  color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+footer {
+  margin-top: 20px;
+  font-weight: bold;
+}
+```
 
 
 ## OUTPUT
+
+<img width="1911" height="950" alt="Screenshot 2026-05-22 192524" src="https://github.com/user-attachments/assets/8874cefa-d12b-4ccd-a278-b7becaf42938" />
 
 
 
